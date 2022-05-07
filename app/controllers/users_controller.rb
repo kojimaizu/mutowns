@@ -16,11 +16,11 @@ class UsersController < ApplicationController
     
     if @user.save
       flash[:success] = "ユーザを登録しました。"
-      redirect_to @user
+      redirect_to @user  #処理をuser#showアクションへと強制的に移動
       
     else
       flash.now[:danger] = "ユーザの登録に失敗しました。"
-      render :new
+      render :new   #単にusers/new.html.erbを表示するのみ
     end
   end
   
