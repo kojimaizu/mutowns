@@ -1,0 +1,37 @@
+<h1><%= @mutalk.id %> トークの詳細ページ</h1>
+
+
+<div class="row">
+    <div class="col-sm-6 offset-sm-3">
+
+        <div class="mb-3 mt-3">
+            <h5>タイトル</h5>
+            <h3><%= @mutalk.title %></h3>
+        </div>
+        
+        <div class="mb-3 mt-4">
+            <h5>本文<br></h5>
+            <h3><%= @mutalk.content %></h3>
+        </div>
+    </div>
+</div>
+        
+<div class="container">
+    <div class="row justify-content-center">
+          
+        <div class="col-2 mt-4">
+            <%= link_to "このトークを編集する", edit_mutalk_path(@mutalk), class: "btn btn-secondary btn-sm" %>
+        </div>
+        
+        <div class="col-2 mt-4">
+            <%= link_to "このトークを削除する", @mutalk, method: :delete, data: { confirm: "本当に削除してよろしいですか？" }, class: 'btn btn-danger btn-sm' %>
+        </div>
+        
+        <div class="col-2 mt-4">
+        <%= link_to "一覧に戻る", mutalks_path, class: "btn btn-outline-dark btn-sm" %>
+        </div>
+        
+        
+    </div>
+
+</div>    

@@ -1,0 +1,10 @@
+<h1>おススメしたい音楽トーク♪</h1>
+
+<ul>
+    <% @mutalks.each do |mutalk| %>
+      <li><%= link_to mutalk.title, mutalk %> <br> <%= mutalk.content %></li>
+    <% end %>
+</ul>
+
+
+<%== pagy_bootstrap_nav(@pagy) %>
