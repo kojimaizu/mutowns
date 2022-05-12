@@ -1,15 +1,17 @@
 class MutalksController < ApplicationController
+    before_action :require_user_logged_in
+    before_action :correct_user, only: [:destroy]
     
     def index
         if logged_in?
-            @mutalks = Mutalk.all
+            @mutalk = current_user.mutalks.build
             @pagy, @mutalks = pagy(Mutalk.all, items:10)
         end
     end
     
     
     def show
-        @mutalk = Mutalk.find(params[ :id])
+        set_mutalk
     end
     
     
@@ -19,13 +21,12 @@ class MutalksController < ApplicationController
     
     
     def create
-        @mutalk = Mutalk.new(mutalk_params)
-        
-        
+        @mutalk = current_user.mutalks.build(mutalk_params)
         if @mutalk.save
             flash[:success] = "トーク が投稿されました"
             redirect_to @mutalk
         else
+            @pagy, @mutalks = pagy(current_user.mutalks.order(id: :desc))
             flash.now[:danger] = "トーク が投稿されませんでした"
             render :new
         end
@@ -33,12 +34,12 @@ class MutalksController < ApplicationController
     
     
     def edit
-        @mutalk = Mutalk.find(params[:id])
+        set_mutalk
     end
     
     
     def update
-        @mutalk = Mutalk.find(params[:id])
+        set_mutalk
         
         if @mutalk.update(mutalk_params)
             flash[:success] = "トーク は更新されました"
@@ -51,7 +52,6 @@ class MutalksController < ApplicationController
     
     
     def destroy
-        @mutalk = Mutalk.find(params[:id])
         @mutalk.destroy
         
         flash[:success] = "トーク は削除されました"
@@ -62,9 +62,21 @@ class MutalksController < ApplicationController
     private
     
     
+    def set_mutalk
+        @mutalk = Mutalk.find(params[:id])
+    end
+    
+    
     #strong parameter
     def mutalk_params
         params.require(:mutalk).permit(:title, :content)
+    end
+    
+    def correct_user
+        @mutalk = current_user.mutalks.find_by(id: params[:id])
+        unless @mutalk
+            redirect_to root_url
+        end
     end
     
 end

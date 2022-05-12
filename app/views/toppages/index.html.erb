@@ -1,5 +1,5 @@
 <% if logged_in? %>
-  <p>ログイン完了ユーザ: <%= current_user.name %></p>
+  <%= render "mutalks/mutalks" %>
 <% else %>  <!-- ログインしてない場合は「新しくはじめる方」ボタンのある画面を表示する -->
     <div class="bg-secondary p-3 p-sm-5 my-4 rounded">
         <div class="text-center text-white">
