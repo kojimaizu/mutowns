@@ -1,6 +1,6 @@
 class MutalksController < ApplicationController
     before_action :require_user_logged_in
-    before_action :correct_user, only: [:destroy]
+    before_action :correct_user, only: [:destroy, :show, :edit, :update]
     
     def index
         if logged_in?
@@ -11,7 +11,6 @@ class MutalksController < ApplicationController
     
     
     def show
-        set_mutalk
     end
     
     
@@ -34,12 +33,10 @@ class MutalksController < ApplicationController
     
     
     def edit
-        set_mutalk
     end
     
     
     def update
-        set_mutalk
         
         if @mutalk.update(mutalk_params)
             flash[:success] = "トーク は更新されました"
@@ -60,11 +57,6 @@ class MutalksController < ApplicationController
     
     
     private
-    
-    
-    def set_mutalk
-        @mutalk = Mutalk.find(params[:id])
-    end
     
     
     #strong parameter

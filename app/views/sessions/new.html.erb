@@ -1,7 +1,11 @@
 <div class="text-center">
     <h1>アカウントログイン</h1>
 </div>
-
+<% if flash[:danger] %>
+     <div class="alert alert-danger" alert-dismissible fade show" rore="alert">
+       <%= flash[:danger] %><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="閉じる"></button>
+     </div>
+<% end %>
 
 <div class="row">
   <div class="col-sm-6 offset-sm-3">    

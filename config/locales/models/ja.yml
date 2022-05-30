@@ -8,4 +8,7 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード確認
+      mutalk:
+        title: タイトル
+        content: 本文
       
