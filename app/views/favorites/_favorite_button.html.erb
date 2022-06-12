@@ -1,0 +1,14 @@
+
+<% if current_user.liking?(mutalk) %>
+  <%= form_with(model: current_user.favorites.find_by(mutalk_id: mutalk.id), method: :delete) do |f| %>
+    <%= hidden_field_tag :mutalk_id, mutalk.id %>
+    <%= f.submit "いいねを解除", class: 'btn btn-danger btn-sm'  %>
+    <%= mutalk.likings.count %>
+  <% end %>
+<% else %>
+  <%= form_with(model: current_user.favorites.build) do |f| %>
+    <%= hidden_field_tag :mutalk_id, mutalk.id %>
+    <%= f.submit "いいね", class: 'btn btn-primary btn-sm' %>
+    <%= mutalk.likings.count %>
+  <% end %>
+<% end %>  

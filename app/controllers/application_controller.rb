@@ -11,4 +11,9 @@ class ApplicationController < ActionController::Base
         end
     end
     
+    def counts(user)
+        @count_mutalks = user.mutalks.count
+        @count_likings = user.likings.count
+    end
+    
 end

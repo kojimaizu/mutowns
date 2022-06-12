@@ -26,6 +26,12 @@ class UsersController < ApplicationController
     end
   end
   
+  # def likings
+  #   @user = User.find(params[:id])
+  #   @pagy, @likings = pagy(@user.likings)
+  #   counts(@user)
+  # end
+  
   private
   
   def user_params

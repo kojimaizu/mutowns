@@ -7,5 +7,20 @@ class User < ApplicationRecord
     has_secure_password
     
     has_many :mutalks
+    has_many :favorites
+    has_many :likings, through: :favorites, source: :mutalk
     
+    def favorite(user)
+        self.favorites.find_or_create_by(mutalk_id: user.id)
+    end
+    
+    def unfavorite(user)
+        favorite = self.favorites.find_by(mutalk_id: user.id)
+        favorite.destroy if favorite
+    end
+    
+    def liking?(mutalk)
+        self.likings.include?(mutalk)
+    end
+    #お気に入りしている投稿内容達を取得し、既に自分がお気に入りしていないか確認。
 end
